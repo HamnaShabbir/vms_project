@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
+
+class ProfileController extends Controller
+{
+    /**
+     * Display the user's profile.
+     */
+    public function index(): View
+    {
+        return view('profile.index', [
+            'user' => Auth::user(),
+        ]);
+    }
+
+    /**
+     * Display the user's profile form.
+     */
+    public function edit(Request $request): View
+    {
+        return view('profile.edit', [
+            'user' => $request->user(),
+        ]);
+    }
+
+    /**
+     * Update the user's profile information.
+     */
+    public function update(ProfileUpdateRequest $request): RedirectResponse
+    {
+
+        $profile_picturePath = $request->user()->profile_picture; // Set default value
+
+        if ($request->hasFile('profile_picture')) {
+            $profile_picturePath = $request->file('profile_picture')->store('profile_picture', 'public');
+        }
+
+        // Merge existing user data with the new profile picture path
+        $request->user()->fill(array_merge($request->validated(), [
+            'profile_picture' => $profile_picturePath
+        ]));
+
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
+        $request->user()->save();
+
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    /**
+     * Delete the user's account.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $user = $request->user();
+        $user->entity_id = null;
+        $user->save();
+        Auth::logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Redirect::to('/');
+    }
+}

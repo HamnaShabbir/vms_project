@@ -1,0 +1,451 @@
+.divider {
+    /* border-top: 1px dashed#950606; */
+    border-top: 1px dashed #049922;
+    margin: 10px 0;
+}
+
+aside ul li ul li {
+    margin-left: 10px;
+}
+
+aside ul li i {
+    color:#950606;
+    /* fallback for old browsers */
+    color: -webkit-linear-gradient(to bottom, #38ef7d,#950606);
+    /* Chrome 10-25, Safari 5.1-6 */
+    /* color: linear-gradient(to bottom, #38ef7d,#950606); */
+
+    color: #049922;
+    margin: 10px 0;
+    /* Adjust the margin for spacing */
+}
+
+aside ul li ul li {
+    margin-left: 10px;
+}
+
+
+
+aside ul li i {
+    color:#950606;
+    /* fallback for old browsers */
+    color: -webkit-linear-gradient(to bottom, #38ef7d,#950606);
+    /* Chrome 10-25, Safari 5.1-6 */
+
+
+}
+
+.nav-sidebar>.nav-item .nav-icon-right {
+    margin-left: 1rem;
+    font-size: 0.7rem;
+    margin-right: 0.2rem;
+    text-align: center;
+}
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active i,
+.sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active i {
+    color: #fff !important;
+}
+
+/* Base button styles */
+.dt-buttons .btn {
+    background-color:#950606 !important;
+    border-color:#950606 !important;
+    color: #fff !important;
+    /* Text color for contrast */
+}
+
+/* Hover effect */
+.dt-buttons .btn:hover {
+    background-color: #0c7d71 !important;
+    /* Darker shade for hover effect */
+    border-color: #0c7d71 !important;
+}
+
+/* Active/focus effect */
+.dt-buttons .btn:focus,
+.dt-buttons .btn:active {
+    background-color: #9b1919 !important;
+    /* Even darker shade for active/focus effect */
+    border-color: #9b1919 !important;
+}
+
+/* Disabled state */
+.dt-buttons .btn.disabled,
+.dt-buttons .btn[disabled] {
+    background-color: #ccc !important;
+    /* Change to your preferred disabled color */
+    border-color: #ccc !important;
+    color: #666 !important;
+    /* Text color for disabled state */
+}
+
+/* Active state */
+.dt-buttons .btn:active {
+    background-color: #075744 !important;
+    /* Change to your preferred active color */
+    border-color: #075744 !important;
+}
+
+/* thead th {
+    text-transform: capitalize;
+}
+
+ thead th[data-exclude="true"] {
+    text-transform: lowercase;
+} */
+/* label
+{
+    text-transform: capitalize !important;
+
+} */
+.btn-warning i {
+    color: #fff !important;
+}
+
+/* aside {
+    text-transform: capitalize !important;
+} */
+.table_form .form-control,
+.table_form select,
+.table_form textarea {
+    min-width: 160px !important;
+    max-width: 100% !important;
+    /* Make the input and select elements full-width */
+    margin: 0 !important;
+    /* padding: 5px; */
+}
+.table_form .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+
+    min-width: auto !important;
+}
+.table_form .input-group:not(.has-validation)>.dropdown-toggle:nth-last-child(n+3), .table_form .input-group:not(.has-validation)>:not(:last-child):not(.dropdown-toggle):not(.dropdown-menu) {
+    /* border-top-right-radius: 0; */
+    /* border-bottom-right-radius: 0; */
+    min-width: auto;
+}
+.table_form .input-group:not(.has-validation)>.custom-file:not(:last-child) .custom-file-label, .table_form .input-group:not(.has-validation)>.custom-file:not(:last-child) .custom-file-label::after, .input-group:not(.has-validation)>.custom-select:not(:last-child), .input-group:not(.has-validation)>.form-control:not(:last-child) {
+    /* border-top-right-radius: 0; */
+    /* border-bottom-right-radius: 0; */
+    min-width: auto !important;
+}
+.table_form td {
+    padding: 0 !important;
+    width: auto
+}
+
+.table_form textarea {
+    width: 420px
+}
+
+.sidebar {
+    font-size: 15px !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background:#950606 !important;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #943636 !important;
+}
+
+.table_form button .form-control {
+    min-width: auto !important;
+    max-width: auto !important;
+    margin: 0px !important;
+    left: -5px;
+    top: 5px;
+    padding: 0px !important;
+}
+
+.table h5 {
+    font-weight: bold;
+    font-size: 15px;
+
+}
+
+/* ------------------------ */
+
+.single_element h4 {
+    margin-bottom: 30px
+}
+
+.single_element .quick_activity_wrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+    margin-bottom: 50px
+}
+
+.single_element .waste .quick_activity_wrap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+    margin-bottom: 50px
+}
+
+.single_element .waste2 .quick_activity_wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+    margin-bottom: 50px
+}
+
+@media(max-width:575.98px) {
+    .single_element .quick_activity_wrap {
+        grid-template-columns: repeat(1, 1fr) !important;
+        grid-gap: 15px;
+        margin-bottom: 30px
+    }
+}
+
+@media only screen and (min-width:576px) and (max-width:767px) {
+    .single_element .quick_activity_wrap {
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-gap: 15px;
+        margin-bottom: 30px
+    }
+}
+
+@media(min-width:768px) and (max-width:991.98px) {
+    .single_element .quick_activity_wrap {
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-gap: 15px;
+        margin-bottom: 30px
+    }
+}
+
+@media(min-width:992px) and (max-width:1199.98px) {
+    .single_element .quick_activity_wrap {
+        grid-template-columns: repeat(2, 1fr) !important;
+        margin-bottom: 30px
+    }
+}
+
+@media(min-width:1200px) and (max-width:1500px) {
+    .single_element .quick_activity_wrap {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+.single_element .single_quick_activity {
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-transition: .5s;
+    transition: .5s;
+    padding: 41px 30px;
+    position: relative;
+    background: #3b76ef
+}
+
+.single_element .single_quick_activity:nth-child(2) {
+    background: #63c7ff
+}
+
+.single_element .single_quick_activity:nth-child(3) {
+    background: #a66dd4
+}
+
+.single_element .single_quick_activity:nth-child(4) {
+    background: #119970
+}
+
+.single_element .single_quick_activity::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    -webkit-transition: .5s;
+    transition: .5s;
+    background-size: cover
+}
+
+@media(max-width:575.98px) {
+    .single_element .single_quick_activity {
+        padding: 20px 15px
+    }
+}
+
+@media only screen and (min-width:576px) and (max-width:767px) {
+    .single_element .single_quick_activity {
+        padding: 20px 15px
+    }
+}
+
+.single_element .single_quick_activity h4 {
+    font-size: 17px;
+    margin-bottom: 0;
+    font-weight: 700;
+    -webkit-transition: .5s;
+    transition: .5s;
+    color: #fff;
+    margin-bottom: 12px
+}
+
+.single_element .single_quick_activity h3 {
+    font-size: 30px;
+    line-height: 40px;
+    margin-bottom: 0;
+    font-weight: 900;
+    -webkit-transition: .5s;
+    transition: .5s;
+    color: #fff;
+    margin-bottom: 7px
+}
+
+.single_element .single_quick_activity p {
+    -webkit-transition: .5s;
+    transition: .5s;
+    font-size: 13px;
+    font-weight: 400;
+    color: #fff
+}
+
+.single_element .single_quick_activity:hover {
+    background:#950606 !important;
+}
+
+.single_element .single_quick_activity:hover::before {
+    background-image: url(/assets/dist/img/diamond.png)
+}
+
+.single_element .single_quick_activity:hover .quick_activity_icon {
+    background-color: rgba(255, 247, 248, .2)
+}
+
+.single_element .single_quick_activity:hover .quick_activity_icon i {
+    color: #fff
+}
+
+/* ---------------------------------- */
+
+.analytics-sparkle-line {
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0px 0px 15px 0px #00000041;
+    transition: .3s;
+    border-radius: 4px;
+}
+
+.analytics-sparkle-line:hover {
+    box-shadow: 0px 0px 15px 0px#95060641;
+}
+
+.analytics-sparkle-line .analytics-content h5,
+.analytics-rounded .analytics-rounded-content h5,
+.analysis-progrebar .analysis-progrebar-content h5 {
+    font-size: 16px;
+    color: #303030
+}
+
+.analytics-sparkle-line .analytics-content h2,
+.analytics-rounded .analytics-rounded-content h2,
+.analysis-progrebar .analysis-progrebar-content h2,
+.analytics-edu .skill .progress .lead-content h3 {
+    font-size: 20px;
+    color: #303030
+}
+
+.analytics-sparkle-line .analytics-content .tuition-fees {
+    font-size: 14px;
+    float: right;
+    margin-top: 8px;
+    color: #999;
+    font-weight: 300
+}
+
+.analytics-content .progress {
+    height: 5px;
+    margin-bottom: 0
+}
+
+.analytics-content .text-success {
+    color:#950606 !important;
+}
+
+.analytics-content .text-danger {
+    color: #933ec5 !important;
+}
+
+.analytics-content .text-info {
+    color: #65b12d !important;
+}
+
+.progress-bar.progress-bar-success {
+    background:#950606 !important;
+}
+
+.analytics-content .text-inverse {
+    color: #d80027 !important;
+}
+
+.progress-bar.progress-bar-danger {
+    background: #933ec5 !important;
+}
+
+.progress-bar.progress-bar-info {
+    background: #65b12d !important;
+}
+
+.progress-bar.progress-bar-inverse {
+    background: #d80027 !important;
+}
+.table-responsive {
+    overflow-x: auto;
+}
+.bootstrap-select>select.bs-select-hidden, select.bs-select-hidden, select.selectpicker {
+    display: block !important;
+}
+.bootstrap-select{
+    display: block !important;
+
+}
+.bootstrap-select>select {
+    position: absolute !important;
+    bottom: 0;
+    left: 50%;
+    display: block !important;
+    width: .5px !important;
+    height: 100% !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    border: none;
+    z-index: 0 !important;
+}
+#result thead tr{
+    text-align: center !important;
+}
+.table_form thead tr{
+    text-align: center !important;
+}
+
+#result thead th{
+    text-align: center !important;
+}
+.table_form thead th{
+    text-align: center !important;
+}
+
+.bootstrap-select .dropdown-menu {
+    max-width:800px !important;
+    width:100%;
+}
