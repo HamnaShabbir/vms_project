@@ -19,7 +19,9 @@ class Visitor extends Model
     //     'approved_at', 'approved_by', 'id_card_image', 'visitor_photo', 'duration', 'visitor_status',
     //     'visitor_id','parking_slot_id'
     // ];
-
+    protected $fillable = [
+        'qr_code',
+    ];
     // protected $fillable = [
     //     'name', 'designation', 'gender', 'phone', 'vehicle_plate_number',
     //     'reason', 'entered_at', 'exited_at', 'host_approval', 'entry_pass_issued',

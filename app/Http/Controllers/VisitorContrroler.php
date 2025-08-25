@@ -290,6 +290,8 @@ class VisitorContrroler extends Controller
         // Fetch host details
         $host = User::find($request->host_id);
 
+        // dd($host);
+
         if (!$host) {
             return back()->withErrors(['host_id' => 'Invalid host selected.']);
         }
@@ -363,21 +365,23 @@ class VisitorContrroler extends Controller
         $visitor->update(['qr_code' => $qrPath]);
 
         // Find the host (using host_id saved from form)
-        $host = Host::find($visitor->host_id);
+        $host = User::find($visitor->host_id);
+
+
 
         // Send email to host
         Mail::raw("
-            New visitor: {$visitor->name}
-            Approve: " . route('visitor.approve', $visitor->id) . "
-            Cancel: " . route('visitor.cancel', $visitor->id) . "
-        ", function($msg) use ($host) {
+        New visitor: {$visitor->name}
+        Approve: " . route('visitor.approve', $visitor->id) . "
+        Cancel: " . route('visitor.cancel', $visitor->id) . "
+    ", function ($msg) use ($host) {
             $msg->to($host->email)->subject('New Visitor Request');
         });
 
         // Send QR code email to visitor
-        Mail::raw("Thanks for pre-registering. Please show this QR on your visit.", function($msg) use ($visitor) {
-            $msg->to($visitor->email)->subject('Your Visitor QR Code');
-        });
+        // Mail::raw("Thanks for pre-registering. Please show this QR on your visit.", function ($msg) use ($visitor) {
+        //     $msg->to($visitor->email)->subject('Your Visitor QR Code');
+        // });
 
         return redirect()->back()->with('success', 'Visit record has been created successfully.');
     }
@@ -389,7 +393,7 @@ class VisitorContrroler extends Controller
         $visitor = Visitor::findOrFail($id);
         $visitor->update(['status' => 'approved']);
 
-        Mail::raw("Your visit is approved. Please bring your QR code.", function($msg) use ($visitor) {
+        Mail::raw("Your visit is approved. Please bring your QR code.", function ($msg) use ($visitor) {
             $msg->to($visitor->email)->subject('Visit Approved');
         });
 
@@ -402,7 +406,7 @@ class VisitorContrroler extends Controller
         $visitor = Visitor::findOrFail($id);
         $visitor->update(['status' => 'canceled']);
 
-        Mail::raw("Sorry, your visit has been canceled.", function($msg) use ($visitor) {
+        Mail::raw("Sorry, your visit has been canceled.", function ($msg) use ($visitor) {
             $msg->to($visitor->email)->subject('Visit Canceled');
         });
 
