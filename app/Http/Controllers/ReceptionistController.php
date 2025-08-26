@@ -8,6 +8,7 @@ use App\Models\Reception;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Visitor;
+
 class ReceptionistController extends Controller
 {
 
@@ -75,7 +76,6 @@ class ReceptionistController extends Controller
 
             // Success Message
             return redirect()->route('receptionist.index')->with('success', 'Receptionist added successfully!');
-
         } catch (\Exception $e) {
             // Catch and Display Error
             return redirect()->back()->with('error', 'Something went wrong! ' . $e->getMessage());
@@ -131,7 +131,7 @@ class ReceptionistController extends Controller
     //     $visitors = Visitor::all(); // Fetch all visitors
     //     return view('dashboard.receptionist', compact('visitors'));
     // }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -142,5 +142,18 @@ class ReceptionistController extends Controller
         $Reception->delete();
 
         return redirect()->route('receptionist.index')->with('success', 'Receptionist added successfully!');
+    }
+
+    public function checkIn($id)
+    {
+        $visitor = Visitor::with('host')->findOrFail($id);
+
+        // Auto-set clock-in time if not already set
+        if (!$visitor->time_of_arrival) {
+            $visitor->time_of_arrival = now(); // current timestamp
+            $visitor->save();
+        }
+
+        return view('receptionist.checkin', compact('visitor'));
     }
 }

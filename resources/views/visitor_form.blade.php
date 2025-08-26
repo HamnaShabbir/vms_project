@@ -36,6 +36,14 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="text" class="shadow-sm form-control @error('email') is-invalid @enderror"
+                                name="email" value="{{ old('email') }}">
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                         <input type="hidden" name="company_id" value="{{ auth()->user()->company_id ?? '' }}">
                         <div class="col-md-6">
                             <label class="form-label">Company/Organization <span class="text-danger">*</span></label>

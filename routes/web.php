@@ -116,11 +116,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('receptionist', ReceptionistController::class);
     // get visitors in receptionist
     // Route::get('/receptionist', [ReceptionistController::class, 'receptionistPage'])->name('receptionist.page');
+    Route::get('/receptionist/checkin/{id}', [ReceptionistController::class, 'checkIn'])->name('receptionist.checkin');
 
     Route::get('/visitor/logs', [VisitorContrroler::class, 'logs'])->name('system-logs');
     Route::put('/visitor/{visitorId}/update-exited-at', [VisitorContrroler::class, 'updateExitedAt'])->name('visitor.updateExitedAt');
     Route::post('/visitor/status_update', [VisitorContrroler::class, 'updateStatus'])->name('visitor.updateStatus');
-
 
 
     Route::resource('departments', DepartmentController::class);

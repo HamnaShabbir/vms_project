@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\VisitorApprovedMail;
+use App\Mail\VisitorCanceledMail;
+use App\Mail\VisitorNotificationMail;
+
 
 class VisitorContrroler extends Controller
 {
@@ -250,6 +254,7 @@ class VisitorContrroler extends Controller
 
             // -------------------------- visitor feild --------------------------------
             'name' => 'required|string|max:255',
+            'email' => 'required|email',
             'company_name' => 'required|string|max:255',
             'department_name' => 'nullable|string|max:255',
             'designation_name' => 'nullable|string|max:255',
@@ -303,6 +308,7 @@ class VisitorContrroler extends Controller
         $visitor->visitor_id = $request->visitor_id;
 
         $visitor->name = $request->name;
+        $visitor->email = $request->email;
         $visitor->company_name = $request->company_name;
         $visitor->department_name = $request->department_name;
         $visitor->designation_name = $request->designation_name;
@@ -359,9 +365,13 @@ class VisitorContrroler extends Controller
 
 
         // Generate QR
-        $qrText = "Visitor ID: {$visitor->id} | Show this QR on your visit";
+        $qrText = route('receptionist.checkin', $visitor->id);
+
         $qrPath = "qrcodes/visitor_{$visitor->id}.png";
-        Storage::disk('public')->put($qrPath, QrCode::format('png')->size(200)->generate($qrText));
+
+        $qrImage = QrCode::format('png')->size(200)->generate($qrText);
+        Storage::disk('public')->put($qrPath, $qrImage);
+
         $visitor->update(['qr_code' => $qrPath]);
 
         // Find the host (using host_id saved from form)
@@ -370,13 +380,7 @@ class VisitorContrroler extends Controller
 
 
         // Send email to host
-        Mail::raw("
-        New visitor: {$visitor->name}
-        Approve: " . route('visitor.approve', $visitor->id) . "
-        Cancel: " . route('visitor.cancel', $visitor->id) . "
-    ", function ($msg) use ($host) {
-            $msg->to($host->email)->subject('New Visitor Request');
-        });
+        Mail::to($host->email)->send(new VisitorNotificationMail($visitor));
 
         // Send QR code email to visitor
         // Mail::raw("Thanks for pre-registering. Please show this QR on your visit.", function ($msg) use ($visitor) {
@@ -393,11 +397,21 @@ class VisitorContrroler extends Controller
         $visitor = Visitor::findOrFail($id);
         $visitor->update(['status' => 'approved']);
 
-        Mail::raw("Your visit is approved. Please bring your QR code.", function ($msg) use ($visitor) {
-            $msg->to($visitor->email)->subject('Visit Approved');
+        // Generate QR
+        $qrText = "Visitor ID: {$visitor->id} | Show this QR on your visit";
+        $qrPath = "qrcodes/visitor_{$visitor->id}.png";
+        Storage::disk('public')->put($qrPath, QrCode::format('png')->size(200)->generate($qrText));
+
+        // Send approval email with QR
+        // Mail::to($visitor->email)->send(new VisitorApprovedMail($visitor, $qrPath));
+        Mail::send('emails.visitor_approved', ['visitor' => $visitor], function ($msg) use ($visitor, $qrPath) {
+            $msg->to($visitor->email)
+                ->subject('Visit Approved')
+                ->attach(storage_path("app/public/{$qrPath}"));
         });
 
-        return "Visitor Approved!";
+
+        return view('visitors.approve', compact('visitor'));
     }
 
     // Host cancels
@@ -406,11 +420,14 @@ class VisitorContrroler extends Controller
         $visitor = Visitor::findOrFail($id);
         $visitor->update(['status' => 'canceled']);
 
-        Mail::raw("Sorry, your visit has been canceled.", function ($msg) use ($visitor) {
+        // Send cancellation email
+        // Mail::to($visitor->email)->send(new VisitorCanceledMail($visitor));
+        // Send cancellation mail
+        Mail::send('emails.visitor_canceled', ['visitor' => $visitor], function ($msg) use ($visitor) {
             $msg->to($visitor->email)->subject('Visit Canceled');
         });
 
-        return "Visitor Canceled!";
+        return view('visitors.cancel', compact('visitor'));
     }
 
 
